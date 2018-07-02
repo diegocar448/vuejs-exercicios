@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html class="no-js"> 
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Watch Vue JS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+
+        <div id="app">
+            <button @click="count++">Aumentar</button>
+            <p>{{ count }}</p>
+
+            <input type="text" v-model="count">
+        </div>
+       
+        
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            new Vue({
+                el:'#app',
+                data:{
+                    count:0
+                },
+                watch:{ 
+                    count: function(value){
+                        var vm = this
+
+                        setTimeout(function(){
+                            vm.count = 0
+                        }, 3000)            
+                    }
+                }
+               
+            })
+        </script>
+    </body>
+</html>
