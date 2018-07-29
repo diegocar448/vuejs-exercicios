@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>v-html Vue JS</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Eventos de Teclas Modificadoras do Sistema no Vue JS</title>
 </head>
 <body>
     <div id="app">
-        <input type="text" v-on:keyup="count++">
-
-        <hr>
-
-        <button @click="count--">Decrementar</button>
-        <button @click="count++">Incrementar</button>
-
-        {{count}}
+        <div @click.ctrl.alt="testeEvent">
+            Clique Aqui!!!
+        </div>
     </div>
-    
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
     <script>
         new Vue({
             el: '#app',
-            data:{
-                count: 0
+            data: {
+                
+            },
+            methods:{
+                testeEvent(){
+                    alert('Teste')
+                }
             }
-
         })
     </script>
 </body>
