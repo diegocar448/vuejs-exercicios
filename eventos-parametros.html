@@ -25,7 +25,11 @@
             },
             methods:{
                 changeInput: function(event){
-                    console.log(event.target.value)                    
+                    console.log(event.target.value)   
+                    //retorna as propriedade do evento nesse caso keyup                 
+                    console.log(event)              
+                    //acessando as informações do evento      
+                    console.log(event.which)                    
                 },
                 changeInputTwo: function(value){
                     this.count += value
