@@ -9,7 +9,7 @@
 <body>
     <div id="app">
         <input type="text" 
-            @keyup.tab="changeValue" 
+            @keyup.enter="changeValue" 
             @keyup.up="changeValueTwo"
             @keyup="getCodeKey">
 
@@ -28,7 +28,7 @@
             },
             methods:{
                 changeValue(event){
-                    this.valueText = event.target.value
+                    this.valueText = event.target.value                    
                 },
                 changeValueTwo(event){
                     alert('changeValueTwo')
