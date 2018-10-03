@@ -9,7 +9,10 @@
 <body>
     <div id="app">
         <!-- <div @click.ctrl.63="testeEvent"> -->
-        <div @click.meta="testeEvent">
+        <!-- <div @click.meta="testeEvent"> -->
+        <!-- <div @click.ctrl="testeEvent"> -->
+        <!-- exact quando clicar pressionando exatamente a tecla ctrl -->    
+        <div @click.ctrl.exact="testeEvent">
             Clique Aqui!!!
         </div>
     </div>
@@ -19,7 +22,7 @@
     <script>
         new Vue({
             el: '#app',
-            data:{
+            data:{ 
                 
             },
             methods:{
