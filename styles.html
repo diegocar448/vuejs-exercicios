@@ -33,9 +33,11 @@
             Exemplo 3/2
         </div>
 
+        <!-- trabalhando com objeto no atributos class -->
         <div :class="classObject"> 
             Exemplo 4 
-        </div> 
+        </div>
+        <!-- usar hack para dar suporte a diferentes navegadores --> 
         <div :style="{display: ['-webkit-flex', '-moz-flex', 'flex']}"> 
             Exemplo 5 
         </div> 
@@ -51,8 +53,9 @@
                 isActive:true,
                 classObject:{
                     active:true,
-                    'text-red':true,
-                    'color-white':false
+                    //usar aspas simples sempre que for usar um nome composto 'string'
+                    'text-red':false,
+                    'color-white':true
                 }
             }
             
