@@ -20,7 +20,7 @@ export default{
 
 <style scoped>
 
-p{color:red;}
-.comp{border:1px solid green; margin:5px; padding:5px;}
+    p{color:red;}
+    .comp{border:1px solid green; margin:5px; padding:5px;}
 </style>
 
