@@ -23,5 +23,6 @@ export default{
 
 <style scoped>
 p{color:green;}
+.comp{border: 1px solid blue; margin:5px; padding:5px;}
 </style>
 

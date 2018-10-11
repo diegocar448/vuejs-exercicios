@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="comp">
         <!-- quando tiver mais de 1 item na tag principal precisa criar um segundo para agrupa-los -->
-        <p>Teste 2</p>
+        <p>{{title}}</p>
         <span>{{msg}}</span>
     </div>
 </template>
@@ -10,7 +10,8 @@
 export default{
     data(){
         return{
-            msg:'Teste de Vue JS 2'
+            msg:'Teste de Vue JS 2',
+            title: 'Component Title'
         }
     }
 
@@ -20,5 +21,6 @@ export default{
 <style scoped>
 
 p{color:red;}
+.comp{border:1px solid green; margin:5px; padding:5px;}
 </style>
 
