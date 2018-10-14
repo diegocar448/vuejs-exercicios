@@ -26,11 +26,17 @@ export default {
         return{
             title:'Busca CEP',
             cep:'',
-            address: {}
+            address: {},
+            //adicionando um preloader
+            preloader: false
         }
     },
     methods:{
         onSubmit(){
+            //this.preloader = true
+
+            
+
             //fazer requisição ajax passando o verbo http
             axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
                 .then(response => {
@@ -40,8 +46,10 @@ export default {
                 })
                 .catch(error => {
                     console.log(error)
+                    alert("Esse CEP não existe")
                 })
-                .finally(() => console.log('Finally'))
+                //.finally(() => console.log('Finally'))
+                .finally(() => this.preloader = false)
         }
     }
 }
