@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    props:['items', 'title'],
+    props:['items', 'title'], 
 
     data(){
         return{

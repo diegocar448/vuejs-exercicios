@@ -3,11 +3,14 @@
         <h1>{{msg}}</h1>
 
         <tasks-component :items="['Laravel', 'Passar', 'Cozinhar']" :title="'Lista de Tarefas'"></tasks-component>
+
+        <list-items-component :title="'Listagem de Algo'" :items="['Val 1', 'Val 2', 'Val 3']"></list-items-component>
     </div>
 </template>
 
 <script>
     import TasksComponent from './components/TasksComponent'
+    import ListItemsComponent from './components/ListItemsComponent'
 
     export default {
         name: "app",
@@ -17,7 +20,8 @@
             };
         },
         components:{
-            TasksComponent
+            TasksComponent,
+            ListItemsComponent
         }
     };
 </script>
