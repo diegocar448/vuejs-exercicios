@@ -2,7 +2,7 @@
     <div id="app">
         <h1>{{msg}}</h1>
 
-        <tasks-component></tasks-component>
+        <tasks-component :items="['Laravel', 'Passar', 'Cozinhar']" :title="'Lista de Tarefas'"></tasks-component>
     </div>
 </template>
 
@@ -48,6 +48,6 @@
     }
 
     a {
-        color: #42b983;
+        color: #42b983;  
     }
 </style>
