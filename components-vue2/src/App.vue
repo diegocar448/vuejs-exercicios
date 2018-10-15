@@ -2,7 +2,7 @@
     <div id="app">
         <h1>{{msg}}</h1>
 
-        <tasks-component :items="['Laravel', 'Passar', 'Cozinhar']" :title="'Lista de Tarefas'"></tasks-component>
+        <tasks-component @calledParent="answerSon" :items="['Laravel', 'Passar', 'Cozinhar']" :title="'Lista de Tarefas'"></tasks-component>
 
         <list-items-component :title="'Listagem de Algo'" :items="['Val 1', 'Val 2', 'Val 3']"></list-items-component>
     </div>
@@ -22,6 +22,11 @@
         components:{
             TasksComponent,
             ListItemsComponent
+        },
+        methods:{
+            answerSon(){
+                alert('Responde o filho')
+            }
         }
     };
 </script>
