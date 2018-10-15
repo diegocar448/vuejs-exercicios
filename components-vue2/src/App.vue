@@ -2,7 +2,7 @@
     <div id="app">
         <h1>{{msg}}</h1>
 
-        <tasks-component @calledParent="answerSon" :items="['Laravel', 'Passar', 'Cozinhar']" :title="'Lista de Tarefas'"></tasks-component>
+        <tasks-component @calledParent="answerSon" :items="tasks" :title="'Lista de Tarefas'"></tasks-component>
 
         <list-items-component :title="'Listagem de Algo'" :items="['Val 1', 'Val 2', 'Val 3']"></list-items-component>
     </div>
@@ -16,7 +16,8 @@
         name: "app",
         data() {
             return {
-            msg: "Vue.js App"
+            msg: "Vue.js App",
+            tasks: ['Laravel', 'Passar', 'Cozinhar']
             };
         },
         components:{
@@ -24,8 +25,10 @@
             ListItemsComponent
         },
         methods:{
-            answerSon(){
-                alert('Responde o filho')
+            //pegar emit com parametro
+            answerSon(task){
+                //coloca um push para incrementar no final do array
+                this.tasks.push(task)
             }
         }
     };
