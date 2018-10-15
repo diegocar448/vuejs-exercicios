@@ -1,11 +1,22 @@
 <template>
     <div>
-        <form action="">
-            <input type="text" placeholder="Nome" v-model="userData.name">
-            {{userData.name}} 
+        <form action="" @submit.prevent="validateBeforeSubmit">
+            <div :class="errors.has('name') ? 'is-danger' : 'is-success'">
+                <input name="name" v-validate="'required|min:3|max:10'" type="text" placeholder="Nome" v-model="userData.name">           
+                <p v-if="errors.has('name')">
+                    {{errors.first('name')}}
+
+                </p>
+            </div>
             <hr>
-            <input type="email" placeholder="E-mail" v-model="userData.email">
-            {{userData.email}} 
+            
+            <div :class="errors.has('email') ? 'is-danger' : 'is-success'">
+                <input type="email" name="email" v-validate="'required|email'" placeholder="E-mail" v-model="userData.email">
+                <p v-if="errors.has('email')">
+                    {{errors.first('email')}}
+
+                </p>
+            </div>
             <hr>
             <input type="number" placeholder="Idade" v-model="userData.age">
             {{userData.age}} 
@@ -39,6 +50,10 @@
             <hr>
             <button type="submit">Enviar Agora</button>
         </form>
+
+        <div v-show="isSubmited">
+            {{ userData }}
+        </div>
     </div>
 </template>
 
@@ -55,13 +70,43 @@ export default {
                 state:'MG'
             },
             terms:true,
-            description:''
+            description:'',
+            isSubmited:false
+        }
+    },
+    methods:{
+        saveData(){
+            this.isSubmited = true
+        },
+        validateBeforeSubmit() {
+            this.$validator.validateAll().then((result) => {
+                if (result) {
+                // eslint-disable-next-line
+                //alert('Form Submitted!');
+                this.isSubmited = true
+                return;
+                }
+
+                alert('Correct them errors!');
+            });
         }
     }
 }
 </script>
 
 <style scoped>
+
+.is-danger{
+    border:1px solid rgb(179,11,11);
+}
+.is-danger p{
+    color: rgb(179,11,11);
+}
+
+.is-success input{
+    border:2px solid green;
+}
+
 
 </style>
 
