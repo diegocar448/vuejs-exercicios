@@ -21,7 +21,7 @@
                     <td>{{ task.name }}</td>
                     <td>
                         <a @click.prevent="edit(index)" class="btn btn-info" href="#">Editar</a>
-                        <a class="btn btn-danger"  href="">Deletar</a>
+                        <a @click.prevent="deleteTask(index)" class="btn btn-danger"  href="#">Deletar</a>
                     </td>
                 </tr>
             </tbody>
@@ -102,6 +102,11 @@ export default {
                 id:'',
                 name:''
             }
+        },
+        deleteTask(index){
+            //alert(this.tasks[index])
+            //Ele pega a posição do array que será deletada e remove apenas um item ,1
+            this.tasks.splice(index, 1)
         }
     }
 }
