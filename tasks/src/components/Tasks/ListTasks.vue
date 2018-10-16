@@ -29,8 +29,9 @@
                     <td>{{ task.id }}</td>
                     <td>{{ task.name }}</td>
                     <td>
-                        <a @click.prevent="edit(index)" class="btn btn-info" href="#">Editar</a>
-                        <a @click.prevent="deleteTask(index)" class="btn btn-danger"  href="#">Deletar</a>
+                        <!-- <a @click.prevent="edit(index)" class="btn btn-info" href="#">Editar</a> -->
+                        <a @click.prevent="edit(task.id)" class="btn btn-info" href="#">Editar</a>
+                        <a @click.prevent="deleteTask(task.id)" class="btn btn-danger"  href="#">Deletar</a>
                     </td>
                 </tr>
             </tbody>
@@ -43,19 +44,13 @@ export default {
     data(){
         return{
             title: 'Lista de Tarefas',
-            tasks:[
-                /* {id:12, name:'nuke'},
-                {id:14, name:'hope'},
-                {id:16, name:'high'},
-                {id:18, name:'take'}, */
-            ],
+            tasks:[],
             task:{
                 id:'',
                 name:''
             }, 
             //se for false é porque esta cadastrando senão esta editando
             updating: false,
-
             //pegar a posição do array para fazer a atualização da linha
             updatedIndex:'',
             filter:''
@@ -67,18 +62,14 @@ export default {
                 this.update()
                 return
             }
-
             this.save()
         },
         
-
         save(){
             //gerar id de task
-            let idTask = this.tasks.length + 1
-
+            this.task.id = this.tasks.length + 1
             //agora vamos adicionar ao nosso task e aparece em nossa listagem
-            this.task.id = idTask
-
+            //this.task.id = idTask
             //alert(this.task.name)
             //adicionar o novo registro a tabela
             this.tasks.push(this.task)
@@ -86,20 +77,18 @@ export default {
             this.clearForm()
             
         },
-        edit(index){
+        edit(id){
+            this.updatedIndex = this.findIndexItem(id)
             //console.log(this.tasks[index])
             //pegando as informações da linha antes da edição
-            this.task = this.tasks[index]
-
-            this.updatedIndex = index
-
+            this.task = this.tasks[this.updatedIndex]
+       
             //alterando o updating para true
             this.updating = true
         },
         update(){
             //aqui ele editar o campo Nome da linha (atualizar a posição do array selecionada)
             this.tasks[this.updatedIndex] = this.task
-
             //alterando o updating para true
             this.updating = false
             
@@ -113,10 +102,19 @@ export default {
                 name:''
             }
         },
-        deleteTask(index){
+        deleteTask(id){
+            let index = this.findIndexItem(id)
             //alert(this.tasks[index])
             //Ele pega a posição do array que será deletada e remove apenas um item ,1
             this.tasks.splice(index, 1)
+        },
+        findIndexItem(id){
+            for (let index = 0; index < this.tasks.length; index++) {                
+                //percorrer os tasks
+                if(this.tasks[index].id == id){
+                    return index
+                }
+            }
         }
     },
     //propriedade computada
@@ -125,30 +123,22 @@ export default {
             if(this.filter === ''){
                 return this.tasks   
             }
-
             //this é a propria instacia do item que estamos trabalhando data(){}
             let vm = this
-
-            return this.tasks.filter(task => {
-                //função indexOf função nativa do JS para filtrar | 
-                //se o retorno maior q -1 ele retorna caso contrario ele não retorno
-                return task.name.indexOf(vm.filter) > - 1
-            })
-
-
             /* return this.tasks.filter(task => {
                 //função indexOf função nativa do JS para filtrar | 
                 //se o retorno maior q -1 ele retorna caso contrario ele não retorno
-                return task.name.toLowerCase().indexOf(vm.filter.toLowerCase()) > - 1
+                //return task.name.indexOf(vm.filter) > - 1
             }) */
-
-
+            return this.tasks.filter(task => {
+                //função indexOf função nativa do JS para filtrar | 
+                //se o retorno maior q -1 ele retorna caso contrario ele não retorno
+                return task.name.toLowerCase().indexOf(vm.filter.toLowerCase()) > - 1
+            })
             /* return this.tasks.filter(task => {
                 //função includes para incluir na pesquisa                
                 return task['name'].includes(vm.filter) 
             }) */
-
-
                 
         }
     }
