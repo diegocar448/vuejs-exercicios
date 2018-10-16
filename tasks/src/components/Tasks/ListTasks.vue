@@ -2,21 +2,30 @@
     <div>
         <h2 class="text-center">{{ title }}</h2>
 
-        <form @submit.prevent="onSubmit" class="form form-inline">
-            <input class="form-control" type="text" placeholder="Nome Tarefa" v-model="task.name">
-            <button class="btn btn-primary" type="submit">Enviar</button>
-        </form>
+        <div class="row">
+            <div class="col">
+                <form class="form form-inline">
+                    <input class="form-control" placeholder="Encontrar?" v-model="filter">            
+                </form>
+            </div>
+            <div class="col">
+                <form @submit.prevent="onSubmit" class="form form-inline">
+                    <input class="form-control" type="text" placeholder="Nome Tarefa" v-model="task.name">
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
 
         <table class="table table-dark">
             <thead>
                 <tr>
                     <th>Id.</th>
-                    <th>Nome</th>
+                    <th>Nome</th> 
                     <th width="180px">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(task, index) in tasks" :key="index">
+                <tr v-for="(task, index) in filteredItems" :key="index">
                     <td>{{ task.id }}</td>
                     <td>{{ task.name }}</td>
                     <td>
@@ -48,7 +57,8 @@ export default {
             updating: false,
 
             //pegar a posição do array para fazer a atualização da linha
-            updatedIndex:''
+            updatedIndex:'',
+            filter:''
         }
     },
     methods:{
@@ -107,6 +117,39 @@ export default {
             //alert(this.tasks[index])
             //Ele pega a posição do array que será deletada e remove apenas um item ,1
             this.tasks.splice(index, 1)
+        }
+    },
+    //propriedade computada
+    computed:{
+        filteredItems(){
+            if(this.filter === ''){
+                return this.tasks   
+            }
+
+            //this é a propria instacia do item que estamos trabalhando data(){}
+            let vm = this
+
+            return this.tasks.filter(task => {
+                //função indexOf função nativa do JS para filtrar | 
+                //se o retorno maior q -1 ele retorna caso contrario ele não retorno
+                return task.name.indexOf(vm.filter) > - 1
+            })
+
+
+            /* return this.tasks.filter(task => {
+                //função indexOf função nativa do JS para filtrar | 
+                //se o retorno maior q -1 ele retorna caso contrario ele não retorno
+                return task.name.toLowerCase().indexOf(vm.filter.toLowerCase()) > - 1
+            }) */
+
+
+            /* return this.tasks.filter(task => {
+                //função includes para incluir na pesquisa                
+                return task['name'].includes(vm.filter) 
+            }) */
+
+
+                
         }
     }
 }
