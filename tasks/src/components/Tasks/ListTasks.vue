@@ -2,7 +2,7 @@
     <div>
         <h2 class="text-center">{{ title }}</h2>
 
-        <form @submit.prevent="save" class="form form-inline">
+        <form @submit.prevent="onSubmit" class="form form-inline">
             <input class="form-control" type="text" placeholder="Nome Tarefa" v-model="task.name">
             <button class="btn btn-primary" type="submit">Enviar</button>
         </form>
@@ -20,7 +20,7 @@
                     <td>{{ task.id }}</td>
                     <td>{{ task.name }}</td>
                     <td>
-                        <a class="btn btn-info" href="">Editar</a>
+                        <a @click.prevent="edit(index)" class="btn btn-info" href="#">Editar</a>
                         <a class="btn btn-danger"  href="">Deletar</a>
                     </td>
                 </tr>
@@ -43,10 +43,25 @@ export default {
             task:{
                 id:'',
                 name:''
-            }
+            }, 
+            //se for false é porque esta cadastrando senão esta editando
+            updating: false,
+
+            //pegar a posição do array para fazer a atualização da linha
+            updatedIndex:''
         }
     },
     methods:{
+        onSubmit(){
+            if(this.updating){
+                this.update()
+                return
+            }
+
+            this.save()
+        },
+        
+
         save(){
             //gerar id de task
             let idTask = this.tasks.length + 1
@@ -57,12 +72,36 @@ export default {
             //alert(this.task.name)
             //adicionar o novo registro a tabela
             this.tasks.push(this.task)
-            //limpar o campo input do form
+            
+            this.clearForm()
+            
+        },
+        edit(index){
+            //console.log(this.tasks[index])
+            //pegando as informações da linha antes da edição
+            this.task = this.tasks[index]
+
+            this.updatedIndex = index
+
+            //alterando o updating para true
+            this.updating = true
+        },
+        update(){
+            //aqui ele editar o campo Nome da linha (atualizar a posição do array selecionada)
+            this.tasks[this.updatedIndex] = this.task
+
+            //alterando o updating para true
+            this.updating = false
+            
+            this.clearForm()
+            
+        },
+        //limpar o campo input do form
+        clearForm(){
             this.task = {
                 id:'',
                 name:''
             }
-            
         }
     }
 }
