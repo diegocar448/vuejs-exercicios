@@ -11,7 +11,7 @@
     </div>
 </template>
 
-<script>
+<script> 
     import Quiz from './components/Animations/Quiz'
 
     export default {
