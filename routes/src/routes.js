@@ -10,6 +10,7 @@ export default [
     {path: '/produtos', component:ProductsComponent, name: 'products'},
     //rota com parametro
     {path: '/tarefa/:id/', component:TasksComponent, name: 'task', props: true},
+    {path:'/redirect', redirect:'/produtos'}
 ]
 
 
