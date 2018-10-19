@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <tasks-component></tasks-component>
-    <products-component></products-component>
-    <home-component></home-component>
+    <router-link to="/">Home</router-link>
+    <router-link to="/produtos">Produtos</router-link>
+    <router-link to="/tarefas">Tarefas</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
