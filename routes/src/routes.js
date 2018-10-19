@@ -9,7 +9,7 @@ export default [
     {path: '/', component:HomeComponent},
     {path: '/produtos', component:ProductsComponent, name: 'products'},
     //rota com parametro
-    {path: '/tarefa/:id/', component:TasksComponent, name: 'task'},
+    {path: '/tarefa/:id/', component:TasksComponent, name: 'task', props: true},
 ]
 
 
