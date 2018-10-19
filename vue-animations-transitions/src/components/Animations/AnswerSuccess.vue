@@ -1,8 +1,10 @@
 <template>
-    <div>
+    <div class="success">
         <h1>{{ title }}</h1>
         <hr>
         <p>Sucesso na resposta!</p>
+
+        <button @click="nextQuestion">Próxima Pergunta</button>
     </div>
 </template>
 
@@ -12,10 +14,15 @@ export default {
         return{
             title:'Sucesso!'
         }
+    },
+    methods:{
+        nextQuestion(){
+            this.$emit('changeMode')
+        }
     }
 }
 </script>
 
 <style scoped>
-
+.success{border: 2px solid green; padding:10px;}
 </style>

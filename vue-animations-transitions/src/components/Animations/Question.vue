@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="default">
         <h2 v-text="question"></h2>
 
         <form @submit.prevent="checkResult">
@@ -38,18 +38,20 @@ export default {
         },
         //aqui verifica se o resultado que o usario informou esta correto
         checkResult(){
+            let mode = 'answer-error'
             if(this.reply == this.result)
-                alert("Acertou!!!")
-            else
-                alert("Errou!!!")
+                //o valor do modulo que quero passar                
+                mode = 'answer-success'
+                /* alert("Errou!!!") */
                 //Aqui vamos enviar para o metodo principal em App.vue
                 //depois em App.vue ele vai chamar um component ou outro components dependendo do resultado 
-                this.$emit('changeMode')             
+            this.$emit('changeMode', mode)             
         }
     }
 }
 </script>
 
 <style scoped>
+.default{border: 2px solid blue; padding:10px;}
 
 </style>

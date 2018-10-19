@@ -5,8 +5,7 @@
         <!-- <app-question @changeMode="changeMode"></app-question> -->
         <!-- pegamos o component pegando ele pelo alias da
             propriedade e colocando no :is -->
-        <component
-            
+        <component            
             :is="mode"
             @changeMode="changeMode">
         </component>
@@ -15,6 +14,8 @@
 
 <script>
 import Question from './Question'
+import AnswerSuccess from './AnswerSuccess'
+import AnswerError from './AnswerError'
 
 
 export default {
@@ -26,13 +27,19 @@ export default {
         }
     },    
     methods:{
-        changeMode(){
-            alert('Uhuuuuu')
+        changeMode(mode){
+            //se nao for informado retorna app-question default
+            if(mode == undefined)
+                this.mode = 'app-question'
+            else
+                this.mode = mode
         }
     },
     components:{
         //colocamos um "alias" para evitar conflitos com nomes iguais
-       'app-question' : Question
+       'app-question' : Question,
+       AnswerSuccess,
+       AnswerError,
     }
 }
 </script>
