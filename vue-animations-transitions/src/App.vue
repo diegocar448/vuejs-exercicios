@@ -1,5 +1,9 @@
 <template>
     <div id="app">
+        <app-quiz></app-quiz>
+
+
+        <hr>
         <button @click.prevent="show = !show">Mostrar</button>
         <transition name="teste">
             <div v-if="show">Mostrando...</div>
@@ -8,13 +12,19 @@
 </template>
 
 <script>
+    import Quiz from './components/Animations/Quiz'
+
     export default {
         name: 'app',
         data () {
             return {
-            msg: 'Welcome to Your Vue.js App',
+            msg: 'VueJS',
             show:false
             }                
+        },
+        components:{
+            //adicionamos "alias" app-quiz para evitar conflito de nome 
+            'app-quiz':Quiz,
         }
     }
 </script>
