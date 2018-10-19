@@ -42,6 +42,9 @@ export default {
                 alert("Acertou!!!")
             else
                 alert("Errou!!!")
+                //Aqui vamos enviar para o metodo principal em App.vue
+                //depois em App.vue ele vai chamar um component ou outro components dependendo do resultado 
+                this.$emit('changeMode')             
         }
     }
 }
