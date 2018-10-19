@@ -8,6 +8,8 @@ Vue.use(VueRouter)
 
 //receber o retorno da nossa configuração do vue-routers
 const router = new VueRouter({
+    //usamos o mode:history para remover o # e deixar a url mais amigavel para seo
+    mode: 'history',
     routes
 })
 
