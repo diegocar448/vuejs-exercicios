@@ -8,7 +8,8 @@ export default [
     //cada json representa uma url
     {path: '/', component:HomeComponent},
     {path: '/produtos', component:ProductsComponent, name: 'products'},
-    {path: '/tarefas', component:TasksComponent},
+    //rota com parametro
+    {path: '/tarefa/:id/', component:TasksComponent, name: 'task'},
 ]
 
 
