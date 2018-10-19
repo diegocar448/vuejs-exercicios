@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-link to="/">Home</router-link>
-    <router-link to="/produtos">Produtos</router-link>
+    <router-link :to="{name: 'products'}">Produtos</router-link>
     <router-link to="/tarefas">Tarefas</router-link>
     <router-view></router-view>
   </div>
@@ -27,7 +27,7 @@ export default {
   }
 }
 </script>
-
+ 
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

@@ -7,7 +7,7 @@ import TasksComponent from './components/TasksComponent'
 export default [
     //cada json representa uma url
     {path: '/', component:HomeComponent},
-    {path: '/produtos', component:ProductsComponent},
+    {path: '/produtos', component:ProductsComponent, name: 'products'},
     {path: '/tarefas', component:TasksComponent},
 ]
 
