@@ -7,6 +7,11 @@
             <button type="submit">Buscar CEP</button>
         </form>
 
+        <div v-if="preloader">
+            <img src="../assets/preloader.gif" alt="Carregando">
+            Carregando...
+        </div>
+
 
         <div v-show="address.bairro != '' ">
             {{address.logradouro}}
@@ -27,17 +32,29 @@ export default {
             cep:'',
             address:{
                 bairro:''
-            }
+            },
+            preloader:false
 
         }
     },
     methods:{
         onSubmit(){
             //alert(this.cep)
+            this.preloader = true,
+
+            //aceita o this sem erros no callback pq o this faz o this.address.. fazer parte da própria instancia
             this.$http.get(`https://api.postmon.com.br/v1/cep/${this.cep}`)
                     .then(response => {
-                        this.address = response.body                      
-                    }, error => console.log(error))
+                        this.address = response.body   
+                        
+                        this.preloader = false
+                    }, error => {
+                        console.log(error)
+                        this.preloader = false
+                    })
+                    .finally(() => {
+                        this.preloader = false
+                    })
         }
     }
 }
