@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h2 v-text="title"></h2>
 
         <!-- <app-question @changeMode="changeMode"></app-question> -->
@@ -10,14 +10,17 @@
             @changeMode="changeMode">
         </component> -->
 
-
-        <!-- out-in : só quando ele sair vai aplicar a entrada || in-out somente quando ele finalizar a entrada ele roda a saída -->
-        <transition name="effect" mode="out-in">
-            <component            
-                :is="mode"
-                @changeMode="changeMode">
-            </component>
-        </transition>
+        <div class="row">
+            <div class="custom-width">
+                <!-- out-in : só quando ele sair vai aplicar a entrada || in-out somente quando ele finalizar a entrada ele roda a saída -->
+                <transition name="effect" mode="out-in">
+                    <component            
+                        :is="mode"
+                        @changeMode="changeMode">
+                    </component>
+                </transition>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -82,6 +85,12 @@ export default {
         }to{
             transform:rotateX(0deg);
         }
+    }
+
+
+
+    .custom-width{
+        max-width: 500px; margin: 0 auto
     }
 
 </style>

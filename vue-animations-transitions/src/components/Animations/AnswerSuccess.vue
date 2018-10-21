@@ -1,10 +1,10 @@
 <template>
-    <div class="success">
+    <div class="alert alert-success">
         <h1>{{ title }}</h1>
         <hr>
         <p>Sucesso na resposta!</p>
 
-        <button @click="nextQuestion">Próxima Pergunta</button>
+        <button class="btn btn-success" @click="nextQuestion">Próxima Pergunta</button>
     </div>
 </template>
 

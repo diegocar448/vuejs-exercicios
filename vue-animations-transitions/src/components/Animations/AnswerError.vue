@@ -1,10 +1,10 @@
 <template>
-    <div class="error">
+    <div class="alert alert-danger">
         <h1>{{ title }}</h1>
         <hr>
         <p>Erro na resposta!</p>
 
-        <button @click="nextQuestion">Próxima Pergunta</button>
+        <button class="btn btn-danger" @click="nextQuestion">Próxima Pergunta</button>
     </div>
 </template>
 
