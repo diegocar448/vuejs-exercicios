@@ -31,7 +31,7 @@
 export default {
     data(){
         return {
-            title: 'Busca Cep com Vue JS',
+            title: 'Busca Cep com Vue JS', 
             cep:'',
             address:{
                 bairro:''
