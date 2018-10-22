@@ -23,6 +23,10 @@
                 </tr>
             </tbody>
         </table>
+
+        <div v-if="preloader">
+            <img src="../../assets/preloader.gif" alt="Preloader" class="preloader">
+        </div>
     </div>
 </template>
 
@@ -31,7 +35,8 @@ export default {
     data(){
         return {
             title:'Lista de Produtos',
-            products:{}
+            products:{},
+            preloader:false
         }
     },
     created(){
@@ -39,6 +44,9 @@ export default {
     },    
     methods:{
         getProducts(){
+            this.preloader = true
+
+
             this.$http.get('http://webservice-laravel-5-5.test/api/v1/products')
                 //then é para pegar o retorno
                 .then(response => {
@@ -46,11 +54,13 @@ export default {
                 }, error =>{
                     console.log(error)
                 })
+                .finally(() => this.preloader = false)
         }
     }
 }
 </script>
 
 <style scoped>
+.preloader{max-width:60px;}
 
 </style>
