@@ -24,6 +24,15 @@
             </tbody>
         </table>
 
+        <ul class="pagination">
+            <li v-if="products.current_page -1 >= 1"  class="page-item">
+                <a href="#" class="page-link" @click.prevent="pagination(products.current_page + -1)"> Voltar </a>
+            </li>
+            <li v-if="products.current_page < products.last_page"  class="page-item">
+                <a href="#" class="page-link" @click.prevent="pagination(products.current_page + 1)"> Próxima Pagina </a>
+            </li>
+        </ul>
+
         <div v-if="preloader">
             <img src="../../assets/preloader.gif" alt="Preloader" class="preloader">
         </div>
@@ -35,7 +44,10 @@ export default {
     data(){
         return {
             title:'Lista de Produtos',
-            products:{},
+            products:{
+                current_page:1,
+                last_page:1,   
+            },
             preloader:false
         }
     },
@@ -47,14 +59,21 @@ export default {
             this.preloader = true
 
 
-            this.$http.get('http://webservice-laravel-5-5.test/api/v1/products')
+            this.$http.get(`http://webservice-laravel-5-5.test/api/v1/products?page=${this.products.current_page}`)
                 //then é para pegar o retorno
                 .then(response => {
+                    console.log(response.body)
                     this.products = response.body
                 }, error =>{
                     console.log(error)
                 })
                 .finally(() => this.preloader = false)
+        },
+        //aqui ele vai passar qual pagina ele vai carregar passando como parametro na função
+        pagination(pageNumber){
+            this.products.current_page = pageNumber
+
+            this.getProducts()
         }
     }
 }
