@@ -13,8 +13,7 @@
         </div>
 
 
-        <div v-show="address.bairro != '' ">
-            {{address.logradouro}}
+        <div v-show="address.bairro != '' ">            
             <p><b>Bairro</b> {{ address.bairro }}</p>
             <p><b>Cidade</b> {{ address.cidade }}</p>
             <p><b>Rua</b> {{ address.logradouro }}</p>
