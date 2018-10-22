@@ -7,6 +7,10 @@
             <button type="submit">Buscar CEP</button>
         </form>
 
+        <div v-if="error != ''">
+            {{ error }}
+        </div>
+
         <div v-if="preloader">
             <img src="../assets/preloader.gif" alt="Carregando">
             Carregando...
@@ -32,13 +36,18 @@ export default {
             address:{
                 bairro:''
             },
-            preloader:false
+            preloader:false,
+            error:''
 
         }
     },
     methods:{
         onSubmit(){
             //alert(this.cep)
+            this.reset()
+
+
+
             this.preloader = true,
 
             //aceita o this sem erros no callback pq o this faz o this.address.. fazer parte da própria instancia
@@ -49,11 +58,18 @@ export default {
                         this.preloader = false
                     }, error => {
                         console.log(error)
-                        this.preloader = false
+
+                        this.error = 'CEP Errado!'
+                        
                     })
                     .finally(() => {
                         this.preloader = false
                     })
+        },
+
+        reset(){
+            this.error = ''
+            this.address = {bairro:''}
         }
     }
 }
