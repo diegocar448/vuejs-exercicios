@@ -2,7 +2,7 @@
     <div>
         <h1 v-text="title"></h1>
 
-        <form @submit.prevent="createProduct">
+        <form @submit.prevent="updateProduct">
             <div class="form-group" :class="{'has-warning' : errorsValidation.name}">
                 <input type="text" class="form-control" placeholder="Nome:" v-model="product.name">
 
@@ -13,7 +13,7 @@
             <div class="form-group" :class="{'has-warning' : errorsValidation.description}">
                 <input type="text" class="form-control" placeholder="Descrição:" v-model="product.description">
 
-                <div v-if="errorsValidation.name" class="">
+                <div v-if="errorsValidation.description" class="">
                     <p v-for="(error, index) in errorsValidation.description" :key="index" v-text="error"></p>
                 </div>
             </div>
@@ -77,11 +77,12 @@ export default {
                 })
                 .finally(() => this.preloader = false )
         },
-        createProduct(){
+        updateProduct(){
             //Pegar a propriedade preloader
             this.preloader = true
 
-            this.$http.post('http://webservice-laravel-5-5.test/api/v1/products', this.product)
+            //usamos o verbo http put para editar
+            this.$http.put(`http://webservice-laravel-5-5.test/api/v1/products/${this.id}`, this.product)
                 .then(response => {
                     //console.log(response)
                     this.$router.push('/product')
