@@ -21,7 +21,12 @@
                     <td>{{product.name}}</td>
                     <td>{{product.description}}</td>
                     <td>
-                        <button class="btn btn-sm btn-success">Editar</button>
+                        <router-link 
+                            :to="{name: 'product.edit', params:{
+                                id: product.id
+                            }}" 
+                            class="btn btn-primary btn-sm">Editar
+                        </router-link>
                         <button class="btn btn-sm btn-danger">Apagar</button>
                     </td>
                 </tr>
