@@ -5,6 +5,12 @@
         <!-- Link para ir para productcreate-->
         <router-link class="btn btn-info btn-cre" to="product/create">Cadatrar Produto</router-link>
         
+        <div class="alert alert-danger text-center" v-if="confirmDelete">
+            <h2>Deseja realmente deletar?</h2>
+            <hr>
+            <button class="btn btn-danger" @click.prevent="deleteProduct">Deletar Agora</button>
+        </div>
+
         <p>Total: <span>{{ products.total }}</span></p>
         <table class="table table-dark">
             <thead>
@@ -27,7 +33,7 @@
                             }}" 
                             class="btn btn-primary btn-sm">Editar
                         </router-link>
-                        <a href="#" @click.prevent="deleteProduct(product.id)" class="btn btn-sm btn-danger">Deletar</a>
+                        <a href="#" @click.prevent="confirmaDeleteProduct(product.id)" class="btn btn-sm btn-danger">Deletar</a>
                     </td>
                 </tr>
             </tbody>
@@ -75,7 +81,9 @@ export default {
             },
             //quantidade de items que quer exibir
             offset:4,
-            preloader:false
+            preloader:false,
+            confirmDelete:false,
+            idProductDelete:0,
         }
     },
     created(){
@@ -95,18 +103,27 @@ export default {
                     console.log(error)
                 })
                 .finally(() => this.preloader = false)
-        },        
-        deleteProduct(id){
+        },
+        confirmaDeleteProduct(id){
+            this.confirmDelete = true
+
+            this.idProductDelete = id
+
+        },                
+        deleteProduct(){
             this.preloader = true
             
-            this.$http.delete(`http://webservice-laravel-5-5.test/api/v1/products/${id}`)
+            this.$http.delete(`http://webservice-laravel-5-5.test/api/v1/products/${this.idProductDelete}`)
             .then(response => {
                     //se der certo  trazer novamente a lista de produtos
                     this.getProducts()
+
                 }, error =>{
                     console.log(error)
                 })
             .finally(() => this.preloader = false)
+
+            this.confirmDelete = false
         }
     },
     components:{
