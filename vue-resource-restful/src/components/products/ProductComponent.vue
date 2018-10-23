@@ -27,7 +27,7 @@
                             }}" 
                             class="btn btn-primary btn-sm">Editar
                         </router-link>
-                        <button class="btn btn-sm btn-danger">Apagar</button>
+                        <a href="#" @click.prevent="deleteProduct(product.id)" class="btn btn-sm btn-danger">Deletar</a>
                     </td>
                 </tr>
             </tbody>
@@ -95,12 +95,18 @@ export default {
                     console.log(error)
                 })
                 .finally(() => this.preloader = false)
-        },
-        //aqui ele vai passar qual pagina ele vai carregar passando como parametro na função
-        pagination(pageNumber){
-            this.products.current_page = pageNumber
-
-            this.getProducts()
+        },        
+        deleteProduct(id){
+            this.preloader = true
+            
+            this.$http.delete(`http://webservice-laravel-5-5.test/api/v1/products/${id}`)
+            .then(response => {
+                    //se der certo  trazer novamente a lista de produtos
+                    this.getProducts()
+                }, error =>{
+                    console.log(error)
+                })
+            .finally(() => this.preloader = false)
         }
     },
     components:{
