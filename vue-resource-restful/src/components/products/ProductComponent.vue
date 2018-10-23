@@ -24,14 +24,22 @@
             </tbody>
         </table>
 
-        <ul class="pagination">
+        <!-- <ul class="pagination">
             <li v-if="products.current_page -1 >= 1"  class="page-item">
                 <a href="#" class="page-link" @click.prevent="pagination(products.current_page + -1)"> Voltar </a>
             </li>
             <li v-if="products.current_page < products.last_page"  class="page-item">
                 <a href="#" class="page-link" @click.prevent="pagination(products.current_page + 1)"> Próxima Pagina </a>
             </li>
-        </ul>
+        </ul> -->
+
+        <pagination-component 
+            :pagination="products"
+            :offset="offset"
+            @paginate="getProducts"
+            >
+
+        </pagination-component>
 
         <div v-if="preloader">
             <img src="../../assets/preloader.gif" alt="Preloader" class="preloader">
@@ -40,6 +48,8 @@
 </template>
 
 <script>
+import PaginationComponent from '../general/PaginationComponent'
+
 export default {
     data(){
         return {
@@ -48,6 +58,8 @@ export default {
                 current_page:1,
                 last_page:1,   
             },
+            //quantidade de items que quer exibir
+            offset:4,
             preloader:false
         }
     },
@@ -75,6 +87,9 @@ export default {
 
             this.getProducts()
         }
+    },
+    components:{
+        PaginationComponent
     }
 }
 </script>
