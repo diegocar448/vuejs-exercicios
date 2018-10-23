@@ -5,6 +5,7 @@
         <!-- Link para ir para productcreate-->
         <router-link class="btn btn-info btn-cre" to="product/create">Cadatrar Produto</router-link>
         
+        <p>Total: <span>{{ products.total }}</span></p>
         <table class="table table-dark">
             <thead>
                 <tr>

@@ -29,7 +29,17 @@ export default {
     },
     methods:{
         createProduct(){
-            console.log(this.product)
+            this.$http.post('http://webservice-laravel-5-5.test/api/v1/products', this.product)
+                .then(response => {
+                    //console.log(response)
+                    this.$router.push('/product')
+                    
+                }, error => {
+                    console.log(error)
+                })
+                .finally(() => console.log('Finalizou !!') )
+
+                
         }
     }
 
