@@ -37,6 +37,10 @@
             </li>
         </ul> -->
 
+        <preloader-component :preloader="preloader">
+
+        </preloader-component>
+
         <pagination-component 
             :pagination="products"
             :offset="offset"
@@ -45,15 +49,16 @@
 
         </pagination-component>
 
-        <div v-if="preloader">
+        <!-- <div v-if="preloader">
             <img src="../../assets/preloader.gif" alt="Preloader" class="preloader">
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
 import PaginationComponent from '../general/PaginationComponent'
-import ProductCreateComponent from '../products/ProductCreateComponent'
+import PreloaderComponent from '../general/PreloaderComponent'
+
 
 export default {
     data(){
@@ -94,8 +99,8 @@ export default {
         }
     },
     components:{
-        PaginationComponent,
-        ProductCreateComponent
+        PaginationComponent, 
+        PreloaderComponent       
     }
 }
 </script>
