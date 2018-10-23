@@ -2,6 +2,9 @@
     <div>
         <h1>{{ title }}</h1>
 
+        <!-- Link para ir para productcreate-->
+        <router-link class="btn btn-info btn-cre" to="product/create">Cadatrar Produto</router-link>
+        
         <table class="table table-dark">
             <thead>
                 <tr>
@@ -49,6 +52,7 @@
 
 <script>
 import PaginationComponent from '../general/PaginationComponent'
+import ProductCreateComponent from '../products/ProductCreateComponent'
 
 export default {
     data(){
@@ -89,12 +93,15 @@ export default {
         }
     },
     components:{
-        PaginationComponent
+        PaginationComponent,
+        ProductCreateComponent
     }
 }
 </script>
 
 <style scoped>
 .preloader{max-width:60px;}
+
+.btn-cre{margin:10px 0;}
 
 </style>
