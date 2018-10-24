@@ -5,7 +5,8 @@
         <task-add-component></task-add-component>
 
         <ul>
-            <li v-for="(task,index) in getTasks" :key="index">
+            <li v-for="(task,index) in getTasks" :key="index" :class="{'completed': task.completed}">
+                <a href="" @click.prevent="completedTask(task)">Toogle</a>
                 {{ task.name }}
             </li>
         </ul>
@@ -22,6 +23,11 @@ export default {
             title:'Lista de Tarefas'
         }
     },
+    methods:{
+        completedTask(task){
+            this.$store.commit('TOOGLE_TASK', task)
+        }
+    },
     computed:{
         getTasks(){
             return this.$store.state.tasks
@@ -34,6 +40,7 @@ export default {
 </script>
 
 <style scoped>
+.completed{background: green;}
 
 </style>
  
