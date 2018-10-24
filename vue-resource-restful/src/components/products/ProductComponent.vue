@@ -2,8 +2,18 @@
     <div>
         <h1>{{ title }}</h1>
 
-        <!-- Link para ir para productcreate-->
-        <router-link class="btn btn-info btn-cre" to="product/create">Cadatrar Produto</router-link>
+        <div class="row">
+            <div class="col">
+                <!-- Link para ir para productcreate-->
+                <router-link class="btn btn-info btn-cre" to="product/create">Cadatrar Produto</router-link>                
+            </div>
+
+            <div class="col">
+                <product-search-component @search="searchProduct"></product-search-component>
+            </div>
+        </div>
+
+        
         
         <div class="alert alert-danger text-center" v-if="confirmDelete">
             <h2>Deseja realmente deletar?</h2>
@@ -69,6 +79,8 @@
 <script>
 import PaginationComponent from '../general/PaginationComponent'
 import PreloaderComponent from '../general/PreloaderComponent'
+import ProductSearchComponent from './ProductSearchComponent'
+
 
 
 export default {
@@ -84,6 +96,7 @@ export default {
             preloader:false,
             confirmDelete:false,
             idProductDelete:0,
+            filter:''
         }
     },
     created(){
@@ -94,7 +107,7 @@ export default {
             this.preloader = true
 
 
-            this.$http.get(`http://webservice-laravel-5-5.test/api/v1/products?page=${this.products.current_page}`)
+            this.$http.get(`http://webservice-laravel-5-5.test/api/v1/products?page=${this.products.current_page}&filter=${this.filter}`)
                 //then é para pegar o retorno
                 .then(response => {
                     console.log(response.body)
@@ -124,11 +137,17 @@ export default {
             .finally(() => this.preloader = false)
 
             this.confirmDelete = false
+        },
+        searchProduct(filter){
+            this.filter = filter
+
+            this.getProducts()
         }
     },
     components:{
         PaginationComponent, 
-        PreloaderComponent       
+        PreloaderComponent ,
+        ProductSearchComponent      
     }
 }
 </script>
