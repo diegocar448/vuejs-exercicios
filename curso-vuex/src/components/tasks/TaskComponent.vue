@@ -20,7 +20,7 @@ import TaskAddComponent from './TaskAddComponent'
 export default {
     data(){
         return{
-            title:'Lista de Tarefas'
+            title:'Lista de Tarefas'  
         }
     },
     methods:{
