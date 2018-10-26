@@ -16,6 +16,7 @@ export default new Vuex.Store({
         ],
     },
     mutations:{
+        //colocar sempre o nome maiusculo das mutations
         //ele recebe o estado
         ADD_TASK (state, task){
             state.tasks.push(task)
@@ -24,7 +25,19 @@ export default new Vuex.Store({
             //se false passa para true e se true passa para false
             task.completed = !task.completed
         }
-    }
+    },
+    actions:{
+        //usaria ajax para se comunicar com a api extena
+        addTask(context, task){
+
+            //...ajax
+            //usamos o commit pq para chamar o mutation precisamos colcoar o commit
+            context.commit('ADD_TASK', task)
+            
+
+        }
+    } 
+
 })
 
 

@@ -18,6 +18,7 @@ export default {
     methods:{
         onSubmit(){
             //alert('Add task...')
+            //this.$store.commit('ADD_TASK', this.task)
             this.$store.commit('ADD_TASK', this.task)
 
             this.task = {

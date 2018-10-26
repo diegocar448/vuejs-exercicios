@@ -28,7 +28,7 @@ export default {
             this.$store.commit('TOOGLE_TASK', task)
         }
     },
-    computed:{
+    computed:{ 
         getTasks(){
             return this.$store.state.tasks
         }
