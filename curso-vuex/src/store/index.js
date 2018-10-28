@@ -34,7 +34,21 @@ export default new Vuex.Store({
             context.commit('ADD_TASK', task)           
 
         }
-    } 
+    },
+    getters:{
+        sortedTasks(state){
+            //criar uma variavel para ordernar nossas tarefas sem alterar o estado original(state)
+            let sorted = state.tasks
+            return sorted.sort((a,b) => {
+                //se o a for menor então ele retorna para corrigir a ordenação
+                if(a.name.toLowerCase() < b.name.toLowerCase()) return -1
+                //mesma inversa se for o inverso da primeira situação
+                if(a.name.toLowerCase() > b.name.toLowerCase()) return 1
+
+                return 0
+            }) 
+        }
+    }
 
 })
 
