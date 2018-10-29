@@ -7,7 +7,7 @@
             <button type="submit">Busca</button>
         </form>
 
-        <div v-if="preloader == true">
+        <div v-if="preloader">
             <img src="../assets/preloader.gif" alt="Preloader..." class="preloader">
         </div>
 
