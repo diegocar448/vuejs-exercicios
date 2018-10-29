@@ -36,6 +36,7 @@ export default new Vuex.Store({
         }
     },
     getters:{
+        //sempre precisa passar o state em todos o getters criados
         sortedTasks(state){
             //criar uma variavel para ordernar nossas tarefas sem alterar o estado original(state)
             let sorted = state.tasks
@@ -47,6 +48,18 @@ export default new Vuex.Store({
 
                 return 0
             }) 
+        },
+        tasksNotCompleted(state){
+            let tasks = state.tasks
+
+            //aqui será para pegar a tarefas que estão completas e as que não estão completas
+            //o filter vai percorrer todas as tasks
+            let tasksNotCompleted = tasks.filter((task) => {
+                //vai retornar o proprio filtro apenas as não completas
+                return !task.completed
+            })
+ 
+            return tasksNotCompleted
         }
     }
 
