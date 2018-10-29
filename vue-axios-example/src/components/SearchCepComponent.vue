@@ -7,6 +7,10 @@
             <button type="submit">Busca</button>
         </form>
 
+        <div v-if="preloader == true">
+            <img src="../assets/preloader.gif" alt="Preloader..." class="preloader">
+        </div>
+
         <div v-if="address.cep">
             <p>Cep: {{ address.cep }}</p>
             <p>logradouro: {{ address.logradouro }}</p>
@@ -28,24 +32,28 @@ export default {
         return{
             title:'Busca CEP',
             cep:'',
-            address: {}
+            address: {},
+            preloader:false
         }
     },
     methods:{
         onSubmit(){
+            this.preloader = true
+
             //alert(this.cep)
             axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
                 .then(response => {
                     console.log(response.data)
 
-                    this.address = response.data
+                    this.address = response.data        
 
                     
                 })
                 .catch(error => {
                     console.log(error)
+                    this.address = ""
                 })
-                .finally(() => console.log('Finally'))
+                .finally(() => this.preloader = false)
 
                 
         }
@@ -55,5 +63,5 @@ export default {
 </script>
 
 <style>
-
+.preloader{max-width:100px;}
 </style>
