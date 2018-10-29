@@ -3,8 +3,12 @@
         <h1 v-text="title"></h1>
 
         <form @submit.prevent="onSubmit">
-            <input type="text" placeholder="CEP:" v-model="cep">
-            <button type="submit">Busca</button>
+            <div :class="{'has-error': error}">
+                <input type="text" placeholder="CEP:" v-model="cep">
+                <button type="submit">Busca</button>
+
+                <div v-if="error" v-text="error"></div>
+            </div>
         </form>
 
         <div v-if="preloader">
@@ -33,7 +37,8 @@ export default {
             title:'Busca CEP',
             cep:'',
             address: {},
-            preloader:false
+            preloader:false,
+            error:''
         }
     },
     methods:{
@@ -45,12 +50,16 @@ export default {
                 .then(response => {
                     console.log(response.data)
 
-                    this.address = response.data        
+                    if(response.data.erro)
+                        this.error = 'Cep Inválido!'
+                    else        
+                        this.address = response.data        
 
                     
                 })
                 .catch(error => {
                     console.log(error)
+                    this.error = '404'
                     this.address = ""
                 })
                 .finally(() => this.preloader = false)
@@ -64,4 +73,6 @@ export default {
 
 <style>
 .preloader{max-width:100px;}
+.has-error{color: rgb(184,33,33);}
+.has-error input{border: 1px solid rgb(184,33,33);}
 </style>
