@@ -2,7 +2,7 @@
   "name": "vue-axios-example",
   "description": "A Vue.js project",
   "version": "1.0.0",
-  "author": "diegocar448 <diegocar448@hotmail.com>",
+  "author": "Diego Cardoso",
   "license": "MIT",
   "private": true,
   "scripts": {

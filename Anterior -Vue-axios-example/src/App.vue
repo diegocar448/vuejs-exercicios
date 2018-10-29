@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-      <search-cep-component></search-cep-component>
+    <search-cep-component></search-cep-component>
+
   </div>
 </template>
 
@@ -11,7 +12,7 @@ export default {
   name: 'app',
   data () {
     return {
-      
+      msg: 'Welcome to Your Vue.js App'
     }
   },
   components:{
