@@ -44,6 +44,7 @@ export default {
     methods:{
         onSubmit(){
             this.preloader = true
+            this.reset()
 
             //alert(this.cep)
             axios.get(`https://viacep.com.br/ws/${this.cep}/json/`)
@@ -62,9 +63,12 @@ export default {
                     this.error = '404'
                     this.address = ""
                 })
-                .finally(() => this.preloader = false)
-
-                
+                .finally(() => this.preloader = false)                
+        },
+        //função para limpar as marcações de erro caso passe pela validação
+        reset(){
+            this.error = ''
+            this.address = {}
         }
     }
     
